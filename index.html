@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Number Guessing Game</title>
+    <meta charset="UTF-8">
+  </head>
+  <body background="https://media.istockphoto.com/id/1227082257/photo/the-black-and-silver-are-light-gray-with-white-the-gradient-is-the-surface-with-templates.jpg?b=1&s=170667a&w=0&k=20&c=AAITBXsgZgNZqof0toy4GwgZaFh2nOFWmwSfeH9qmFs=">
+    <b><I><u><h1>Number Guessing Game</u></h1>
+    <h3><p>Enter a number between 1 and 100:</p></I></b>
+    <input type="number" id="userInput">
+    <button onclick="startGame();changecolors()">Start Game</button>
+    <p id="result"></p>
+    </h3>
+    <script>
+        let answer;
+        let attemptsLeft = 5;
+
+        function startGame() {
+          const userInput = document.getElementById("userInput").value;
+
+          if (userInput < 1 || userInput > 100) {
+            document.getElementById("result").innerHTML = "Please enter a number between 1 and 100.";
+           return;
+          }
+
+          answer = userInput;
+
+         attemptsLeft = 5;
+
+        guessNumber();
+      }
+
+      function guessNumber() {
+        const guess = Math.floor(Math.random() * 100) + 1;
+        attemptsLeft--;
+        document.getElementById("result").innerHTML += `Attempt ${5-attemptsLeft}: Computer guessed ${guess}.<br>`;
+        if (guess == answer) {
+          document.getElementById("result").innerHTML += "Computer guessed the number correctly. Computer wins!";
+        return;
+        }
+
+        if (attemptsLeft <= 0) {
+          document.getElementById("result").innerHTML += `Computer ran out of attempts. User wins! The answer was ${answer}.`;
+        return;
+        }
+        setTimeout(guessNumber, 1000);
+      }
+      var index= 0;
+      function changecolors(){
+        var colors = ["red","blue","orange","yellow","green","purple"];
+        document.getElementsByTagName("body")[0].style.background = colors[index++];
+        if(index > colors.length - 1)
+        index = 0;
+      }
+
+    </script>
+  </body>
+</html>
